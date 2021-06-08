@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const mysql = require("../mysql").pool;
 const multer = require('multer');
+const login = require('../Middleware/login');
+
 const storage = multer.diskStorage({
   destination: function(req,file,cb) {
     cb(null, 'imagens/');  
@@ -50,7 +52,7 @@ router.get("/", (req, res, next) => {
   });
 });
 
-router.post("/",upload.single('carroImg'), (req, res, next) => {
+router.post("/",upload.single('carroImg'), login,(req, res, next) => {
   console.log(req.file);
   mysql.getConnection((error, conn) => {
     if (error) {
@@ -112,10 +114,11 @@ router.get("/:id_carro", (req, res, next) => {
       "select * from carros where Id_Carro = ?",
       [req.params.id_carro],
       (error, result, fields) => {
-        if (error) {
+        if (error) { 
           return res.status(500).send({ error: error });
         }
 
+        // eslint-disable-next-line eqeqeq
         if(result.lenght == 0 ){
             return res.status(404).send({
                 mensagem: 'Carro desconhecido'

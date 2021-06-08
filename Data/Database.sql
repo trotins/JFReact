@@ -12,13 +12,13 @@ create table if not exists clientes(
 Id_Cliente int auto_increment primary key,
 Nome varchar(50) not null,
 iban varchar(50) not null,
-email varchar(50),
+email varchar(50)not null,
 Telefone int,
 VendedoresFK int,
+password varchar(100),
 Foreign key (VendedoresFK) references vendedores(Id_Vendedor)
 );
-alter TABLE clientes
-add COLUMN password VARCHAR(100);
+
 
 create table if not exists carros(
 Id_Carro int auto_increment primary key,
@@ -34,6 +34,13 @@ Descricao varchar(50) not null,
 Foto varchar(50) not null,
 VendedoresFK int,
 Foreign key (VendedoresFK) references vendedores(Id_Vendedor)
+);
+
+CREATE TABLE Imagens_Carros(
+    Id_Imagem int not null PRIMARY key auto_increment,
+    Id_Carro int,
+    caminho varchar(255),
+    FOREIGN key(Id_Carro) REFERENCES carros(Id_Carro)
 );
 
 insert into vendedores(Nome,Email,Telefone)
