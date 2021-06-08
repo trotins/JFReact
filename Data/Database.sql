@@ -17,7 +17,8 @@ Telefone int,
 VendedoresFK int,
 Foreign key (VendedoresFK) references vendedores(Id_Vendedor)
 );
-
+alter TABLE clientes
+add COLUMN password VARCHAR(100);
 
 create table if not exists carros(
 Id_Carro int auto_increment primary key,
