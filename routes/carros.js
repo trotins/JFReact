@@ -52,7 +52,7 @@ router.get("/", (req, res, next) => {
   });
 });
 
-router.post("/",upload.single('carroImg'), login,(req, res, next) => {
+router.post("/",login.obrigatorio,upload.single('carroImg'), (req, res, next) => {
   console.log(req.file);
   mysql.getConnection((error, conn) => {
     if (error) {
@@ -151,7 +151,7 @@ router.get("/:id_carro", (req, res, next) => {
   });
 });
 
-router.patch("/", (req, res, next) => {
+router.patch("/",login.obrigatorio, (req, res, next) => {
   mysql.getConnection((error, conn) => {
     if (error) {
       return res.status(500).send({ error: error });
@@ -221,7 +221,7 @@ router.patch("/", (req, res, next) => {
   });
 });
 
-router.delete("/", (req, res, next) => {
+router.delete("/",login.obrigatorio, (req, res, next) => {
     mysql.getConnection((error, conn) => {
         if (error) {
           return res.status(500).send({ error: error });
