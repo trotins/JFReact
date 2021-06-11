@@ -24,26 +24,27 @@ router.post(
   Carros_Controller.postCarros
 );
 
-router.get("/:id_carro", Carros_Controller.getEspecifico);
+router.get("/:Id_Carro", Carros_Controller.getEspecifico);
 
-router.patch("/", login.obrigatorio, Carros_Controller.patchCarro);
+router.patch("/:Id_Carro", login.obrigatorio,upload.single('Foto'), Carros_Controller.patchCarro);
 
 router.delete("/", login.obrigatorio, Carros_Controller.deleteCarro);
 
 router.post(
-  '/:id_carro/imagem',
+  '/:Id_Carro/imagem',
   login.obrigatorio,
   upload.single('Foto'),
-  Carros_Controller.postCarrosImg);
+  Carros_Controller.postCarrosImg
+  );
 
 router.get(
-  '/:id_carro/imagens',
+  '/:Id_Carro/imagens',
   Carros_Controller.getCarrosImg
-)
+);
 router.delete(
-  '/:id_carro/:Id_Imagem',
+  '/:Id_Carro/:Id_Imagem',
   login.obrigatorio,
   Carros_Controller.deleteImagem
-)
+);
 
 module.exports = router;
